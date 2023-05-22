@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0 20px;
+  position: relative;
+  width: 100vw;
+}
+
+.container-limit {
+  max-width: 1280px;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  height: 70px;
+  justify-content: flex-end;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+#settings {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+#settings img {
+  height: 30px;
+}
