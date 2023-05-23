@@ -7,11 +7,11 @@ import sound from './sounds/trim.wav'
 function App() {
   const [startValues, setStartValues] = useState(
     {
-      focus: '01',
+      focus: '25',
       short: '05',
       long: '10',
       timesToLong: 4,
-      autoStart: true
+      autoStart: false
     }
   )
   const [optionValues, setOptionValues] = useState({
