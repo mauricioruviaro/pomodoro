@@ -174,3 +174,84 @@ svg rect {
   align-items: center;
   transition: all 500ms;
 }
+
+.modal {
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  padding: 20px;
+  position: relative;
+  transition: all 500ms;
+  width: 100%;
+  z-index: 9999;
+}
+
+.x-button {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  transition: all 200ms;
+}
+
+.x-button:hover {
+  opacity: .9;
+  transition: all 200ms;
+}
+
+.settings-container {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.input-container span {
+  font-size: .8rem;
+}
+
+.input-container input {
+  height: 35px;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+#label-autoStart {
+  align-items: center;
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+}
+
+.close-button {
+  background-color: #393939;
+  border: none;
+  border-radius: 2px;
+  color: #FFFFFF;
+  cursor: pointer;
+  height: 35px;
+  margin-top: 2rem;
+  padding: 5px 10px;
+  transition: all 200ms;
+  width: 100px;
+}
+
+.close-button:hover {
+  opacity: .9;
+  transition: all 200ms;
+}
