@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Button from './components/Button.jsx'
 import settings from './images/settings-white.png'
+import x from './images/x.svg'
 import sound from './sounds/trim.wav'
 
 function App() {
@@ -113,7 +114,7 @@ function App() {
     }
   }, [buttonText, minutes, seconds])
 
-  function startStop() {
+  const startStop = () => {
     if (buttonText === 'Iniciar') {
       setButtonText('Parar')
     } else {
@@ -121,8 +122,24 @@ function App() {
     }
   }
 
-  const openCloseModal = () => {
-    setModalOpen(!modalOpen)
+  const openCloseModal = (event) => {
+    const pixelsByScreen = window.screen.width <= 460 ? 786 : 1100
+
+    if (!modalOpen) {
+      setButtonText('Iniciar')
+      setModalOpen(true)
+      const rect = document.querySelector('#timer-rect')
+      rect.style.strokeDashoffset = pixelsByScreen
+      return
+    }
+
+    if (modalOpen && event.target.className.includes('close')) {
+      setModalOpen(false)
+      setMinutes(optionValues[option].time)
+      setSeconds('00')
+      const rect = document.querySelector('#timer-rect')
+      rect.style.strokeDashoffset = pixelsByScreen
+    }
   }
 
   const changeOption = (opt) => {
@@ -138,6 +155,62 @@ function App() {
     const pixelsByScreen = window.screen.width <= 460 ? 786 : 1100
     rect.style.strokeDashoffset = pixelsByScreen
     document.title = `${optionValues[opt].time}:00 - Hora de ${option === 'focus' ? 'focar!' : 'dar uma pausa!'}!`
+  }
+
+  const handleChangeSettingsValues = ({ target: { name, value } }) => {
+    setValuesToState(name, value)
+  }
+
+  const changeAutoStart = () => {
+    setStartValues((previous) => {
+      return {
+        ...previous,
+        autoStart: !startValues.autoStart
+      }
+    })
+  }
+
+  const setValuesToState = (name, value) => {
+    setStartValues((previous) => {
+      return {
+        ...previous,
+        [name]: value
+      }
+    })
+
+    setOptionValues((previous) => {
+      return {
+        ...previous,
+        [name]: {
+          ...previous[name],
+          time: value
+        }
+      }
+    })
+  }
+
+  const checkValidTime = ({ target: { name, value } }) => {
+    if (!Number(value) || Number(value) <= 0) {
+      value = 1
+    }
+
+    if (Number(value) >= 1 && Number(value) <= 9) {
+      value = `0${Number(value)}`
+    }
+
+    if (value > 60) {
+      value = 60
+    }
+
+    setValuesToState(name, value)
+  }
+
+  const checkValidCountTimer = ({ target: { name, value } }) => {
+    if (!Number(value) || Number(value) <= 0) {
+      value = 1
+    }
+
+    setValuesToState(name, value)
   }
 
   return (
@@ -183,6 +256,43 @@ function App() {
       <audio id="sound-player">
         <source src={sound} type="audio/mp3" />
       </audio>
+
+      {modalOpen && (
+        <div className="container-modal close" onClick={openCloseModal}>
+          <div className="modal">
+            <h1 className="gray">Configurações</h1>
+            <img className="x-button close" src={x} alt="" onClick={openCloseModal} />
+
+            <div className="settings-container">
+              <div className="input-container">
+                <span className="gray">Focus time</span>
+                <input type="number" min="1" name="focus" value={startValues.focus} onChange={handleChangeSettingsValues} onBlur={checkValidTime} />
+              </div>
+              <div className="input-container">
+                <span className="gray">Short break time</span>
+                <input type="number" min="1" name="short" value={startValues.short} onChange={handleChangeSettingsValues} onBlur={checkValidTime} />
+              </div>
+              <div className="input-container">
+                <span className="gray">Long break time</span>
+                <input type="number" min="1" name="long" value={startValues.long} onChange={handleChangeSettingsValues} onBlur={checkValidTime} />
+              </div>
+              <div className="input-container">
+                <span className="gray">Times to long break</span>
+                <input type="number" min="1" name="timesToLong" value={startValues.timesToLong} onChange={handleChangeSettingsValues} onBlur={checkValidCountTimer} />
+              </div>
+            </div>
+
+            <label id="label-autoStart" for="autoStart" className="gray">
+              <input type="checkbox" id="autoStart" checked={startValues.autoStart} name="autoStart" onClick={changeAutoStart} />
+              Auto start times
+            </label>
+
+            <button className="close-button close" type="button" onClick={openCloseModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
