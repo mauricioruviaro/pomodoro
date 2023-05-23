@@ -49,3 +49,56 @@ header {
 #settings img {
   height: 30px;
 }
+
+.red {
+  background-color: rgb(186, 73, 73);
+  color: rgb(186, 73, 73);
+  transition: all 500ms;
+}
+
+.green {
+  background-color: rgb(56, 133, 138);
+  color: rgb(56, 133, 138);
+  transition: all 500ms;
+}
+
+.blue {
+  background-color: rgb(57, 112, 151);
+  color: rgb(57, 112, 151);
+  transition: all 500ms;
+}
+
+.gray {
+  color: #393939;
+}
+
+.selected {
+  background-color: #ffffff48 !important;
+}
+
+.buttons-container {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  margin-top: 70px;
+  width: 100%;
+}
+
+.buttons-container button {
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 20px;
+  height: 40px;
+  transition: all 500ms;
+  width: 150px;
+}
+
+.buttons-container button:hover {
+  background-color: #ffffff1d;
+  transition: all 500ms;
+}
